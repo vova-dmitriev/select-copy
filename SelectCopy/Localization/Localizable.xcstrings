@@ -1,0 +1,12 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "toast.copied" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copied" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Скопировано" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

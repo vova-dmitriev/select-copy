@@ -1,0 +1,93 @@
+import AppKit
+
+enum ToastContent: Equatable {
+    case text(String)
+    case iconOnly
+}
+
+struct ToastScreen: Equatable {
+    let frame: NSRect
+    let visibleFrame: NSRect
+}
+
+@MainActor
+protocol ToastScreenProviding: AnyObject {
+    func screen(containing point: CGPoint) -> ToastScreen?
+    var mainScreen: ToastScreen? { get }
+}
+
+@MainActor
+protocol ToastPaneling: AnyObject {
+    var contentSize: NSSize { get }
+    func show(content: ToastContent, frame: NSRect)
+    func hide()
+}
+
+@MainActor
+final class ToastCoordinator: CopyConfirmationPresenting {
+    private let settings: SettingsStore
+    private let localizer: Localizer
+    private let panel: ToastPaneling
+    private let screens: ToastScreenProviding
+    private let scheduler: DelayScheduling
+    private var dismissalTask: Task<Void, Never>?
+
+    init(
+        settings: SettingsStore,
+        localizer: Localizer,
+        panel: ToastPaneling,
+        screens: ToastScreenProviding,
+        scheduler: DelayScheduling = SystemDelayScheduler()
+    ) {
+        self.settings = settings
+        self.localizer = localizer
+        self.panel = panel
+        self.screens = screens
+        self.scheduler = scheduler
+    }
+
+    func showCopyConfirmation(at screenPoint: CGPoint?) {
+        guard settings.settings.toastEnabled else {
+            return
+        }
+        show(content: contentForCurrentSettings(), at: screenPoint)
+    }
+
+    func showPreview() {
+        show(content: contentForCurrentSettings(), at: nil)
+    }
+
+    private func contentForCurrentSettings() -> ToastContent {
+        switch settings.settings.toastContentMode {
+        case .localizedText:
+            return .text(localizer.text("toast.copied"))
+        case .customText:
+            let text = settings.settings.customToastText
+            return text.isEmpty ? .iconOnly : .text(text)
+        case .iconOnly:
+            return .iconOnly
+        }
+    }
+
+    private func show(content: ToastContent, at point: CGPoint?) {
+        guard let screen = point.flatMap(screens.screen(containing:)) ?? screens.mainScreen else {
+            return
+        }
+
+        let frame = settings.settings.toastPosition.frame(
+            for: panel.contentSize,
+            in: screen.visibleFrame,
+            inset: 20
+        )
+        dismissalTask?.cancel()
+        panel.show(content: content, frame: frame)
+        dismissalTask = Task { [weak self] in
+            do {
+                try await self?.scheduler.sleep(milliseconds: 1_200)
+            } catch {
+                return
+            }
+            self?.panel.hide()
+        }
+    }
+}

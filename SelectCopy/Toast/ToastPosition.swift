@@ -1,12 +1,15 @@
 import AppKit
 
-enum ToastPosition: String, CaseIterable, Codable, Sendable {
+enum ToastPosition: String, CaseIterable, Codable, Sendable, Identifiable {
     case topLeading
     case topCenter
     case topTrailing
     case bottomLeading
     case bottomCenter
     case bottomTrailing
+
+    var id: String { rawValue }
+    var label: String { rawValue }
 
     func frame(for size: NSSize, in visibleFrame: NSRect, inset: CGFloat) -> NSRect {
         let x: CGFloat

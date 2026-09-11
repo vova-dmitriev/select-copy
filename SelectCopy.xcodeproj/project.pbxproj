@@ -36,6 +36,7 @@
 		BC1E6E8C8112D840D4D870B1 /* ToastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18154775A475BCC22C3938E8 /* ToastCoordinator.swift */; };
 		BF1834D5D55EA74D3858FFA0 /* CopyFallbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02D252FA2D071F7709C913 /* CopyFallbackService.swift */; };
 		C3990571B44F077C3E8B1455 /* LoginItemServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F43A01D32833FE7201934 /* LoginItemServiceTests.swift */; };
+		C68CFEE61C70470C2907A5DB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3784794BE439293554F93 /* OnboardingView.swift */; };
 		C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89779FCF2B68629BF9B572 /* PasteboardClient.swift */; };
 		D00A78AAC458862F3C3A8C15 /* ToastPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E514B150D498AEE06209B2B /* ToastPanel.swift */; };
 		DD5E6716656FDFEEFC690F02 /* LoginItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BA2E1B10FB43EAC13423E2 /* LoginItemService.swift */; };
@@ -106,6 +107,7 @@
 		BD2A2AC73D3B7A3CD725BB35 /* ToastPositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPositionTests.swift; sourceTree = "<group>"; };
 		CBB0EAA3A75ABA298A09021F /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		D69767D9EACB5C270D62AE16 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		D8E3784794BE439293554F93 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E52535D259E597D830EF236B /* InputEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEvent.swift; sourceTree = "<group>"; };
 		EE89BADF0826B1A30EBE4CD4 /* Localizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
 		EF5DB83B9152F85314DF48C8 /* AccessibilityClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityClientTests.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				72DEE1708FC12509CA791107 /* Coordinator */,
 				B2475FC64EE30DEBDE2D10D6 /* Localization */,
 				5F881740C32D492217092822 /* Monitoring */,
+				F2C57FD2D593D6E5327CC777 /* Onboarding */,
 				B2956B99904C9EA39D99F8B6 /* Settings */,
 				A7B80411A734B1542EF9E808 /* Support */,
 				5359AE6BE6C4B9575707F3EB /* Toast */,
@@ -281,6 +284,14 @@
 				2F83BB1E44E6FED733F0AF0D /* SelectCopyUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F2C57FD2D593D6E5327CC777 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D8E3784794BE439293554F93 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +413,7 @@
 				8F1888350580CDAA72FF7BFA /* InputEvent.swift in Sources */,
 				DFAAF1E7843A4934BEC2D2CB /* Localizer.swift in Sources */,
 				DD5E6716656FDFEEFC690F02 /* LoginItemService.swift in Sources */,
+				C68CFEE61C70470C2907A5DB /* OnboardingView.swift in Sources */,
 				C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */,
 				226BDD798F4CA49E87CF878C /* PermissionCoordinator.swift in Sources */,
 				E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */,

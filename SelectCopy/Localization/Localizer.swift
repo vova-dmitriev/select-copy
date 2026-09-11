@@ -20,6 +20,14 @@ final class Localizer: ObservableObject {
         "menu.quit": ["en": "Quit", "ru": "Выйти"],
         "permission.missing": ["en": "Accessibility permission is required", "ru": "Нужно разрешение Accessibility"],
         "permission.openSettings": ["en": "Open System Settings", "ru": "Открыть Системные настройки"],
+        "settings.toastEnabled": ["en": "Show copy notification", "ru": "Показывать уведомление о копировании"],
+        "settings.toastPosition": ["en": "Toast position", "ru": "Положение уведомления"],
+        "settings.toastContent": ["en": "Toast content", "ru": "Содержимое уведомления"],
+        "settings.localizedText": ["en": "Localized text", "ru": "Переводимый текст"],
+        "settings.customText": ["en": "Custom text", "ru": "Свой текст"],
+        "settings.iconOnly": ["en": "Icon only", "ru": "Только иконка"],
+        "settings.language": ["en": "Language", "ru": "Язык"],
+        "settings.launchAtLogin": ["en": "Launch at login", "ru": "Запускать при входе"],
     ]
 
     init(language: AppLanguage, systemLocaleIdentifier: String = Locale.current.identifier) {

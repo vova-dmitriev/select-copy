@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		226BDD798F4CA49E87CF878C /* PermissionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A43A34C28090EB335EBAE3 /* PermissionCoordinator.swift */; };
+		3A80482FA1054EEAC706EE7C /* DelayScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B3DFFAFEB2C4E6CCF27B79 /* DelayScheduler.swift */; };
 		4230E28ACABEDDB131DC6405 /* SelectionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB8E01CB6C236FAFCD30E9 /* SelectionMonitor.swift */; };
 		42DA607AD2A41B91C6F84D9B /* SelectionGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D344A8722B3F63D7E4E17F /* SelectionGesture.swift */; };
 		44A48294CFE519335BB99101 /* SelectionMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B68773B5AA6A1FD19DE2D3 /* SelectionMonitorTests.swift */; };
+		47CE4292FAB45D72766DC6FE /* CopyFallbackServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C25304CE4E29C564AF7ABF /* CopyFallbackServiceTests.swift */; };
 		4B086C708B5DFB2F027F9555 /* SelectionGestureClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */; };
 		4D7CD25ABA32C109A0A01A35 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62D3F73D1E876629D2373C /* TestDoubles.swift */; };
 		54403B545D94633C5B36C74A /* SmokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8348C4B79D99A718C2AEBD /* SmokeUITests.swift */; };
@@ -19,9 +21,12 @@
 		89251A25C7B818E2752424F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB3CC859082A18A9FDD601 /* AppDelegate.swift */; };
 		8ADC7E69200DD03607DC00CD /* AccessibilityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59325386B871FCC02EC7A50A /* AccessibilityClient.swift */; };
 		8F1888350580CDAA72FF7BFA /* InputEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52535D259E597D830EF236B /* InputEvent.swift */; };
+		BF1834D5D55EA74D3858FFA0 /* CopyFallbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02D252FA2D071F7709C913 /* CopyFallbackService.swift */; };
+		C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89779FCF2B68629BF9B572 /* PasteboardClient.swift */; };
 		E27BD54D25AA27DAB5A673E3 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */; };
 		E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6782DC2D3A8034C1817FC4EE /* SelectCopyApp.swift */; };
 		EE7C33BC9572CB83898C162C /* AccessibilityClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5DB83B9152F85314DF48C8 /* AccessibilityClientTests.swift */; };
+		FE8DA501BB60F2BC6DC85D76 /* PasteboardClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D38FD501F5795647942096 /* PasteboardClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,24 +50,29 @@
 		0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureClassifierTests.swift; sourceTree = "<group>"; };
 		19135FD5B72494913CABA11D /* PermissionCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCoordinatorTests.swift; sourceTree = "<group>"; };
 		1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
+		2A89779FCF2B68629BF9B572 /* PasteboardClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardClient.swift; sourceTree = "<group>"; };
 		2F83BB1E44E6FED733F0AF0D /* SelectCopyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectCopyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F1E51149A0E183133B913 /* SelectCopyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectCopyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42B68773B5AA6A1FD19DE2D3 /* SelectionMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMonitorTests.swift; sourceTree = "<group>"; };
 		59325386B871FCC02EC7A50A /* AccessibilityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityClient.swift; sourceTree = "<group>"; };
 		6782DC2D3A8034C1817FC4EE /* SelectCopyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCopyApp.swift; sourceTree = "<group>"; };
+		79C25304CE4E29C564AF7ABF /* CopyFallbackServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyFallbackServiceTests.swift; sourceTree = "<group>"; };
 		7F8348C4B79D99A718C2AEBD /* SmokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeUITests.swift; sourceTree = "<group>"; };
 		80A43A34C28090EB335EBAE3 /* PermissionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCoordinator.swift; sourceTree = "<group>"; };
 		83254A5DB2DC24EBEDAE9158 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		89E9782AB912727B415B5DC2 /* SelectionGestureClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureClassifier.swift; sourceTree = "<group>"; };
 		8E62D3F73D1E876629D2373C /* TestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
+		91D38FD501F5795647942096 /* PasteboardClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardClientTests.swift; sourceTree = "<group>"; };
 		946EC5C05606F446A5826E9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9ACB8E01CB6C236FAFCD30E9 /* SelectionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMonitor.swift; sourceTree = "<group>"; };
 		B7D344A8722B3F63D7E4E17F /* SelectionGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGesture.swift; sourceTree = "<group>"; };
+		B9B3DFFAFEB2C4E6CCF27B79 /* DelayScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayScheduler.swift; sourceTree = "<group>"; };
 		BC6DA3997FDFD70FF7C2A25C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		E52535D259E597D830EF236B /* InputEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEvent.swift; sourceTree = "<group>"; };
 		EF5DB83B9152F85314DF48C8 /* AccessibilityClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityClientTests.swift; sourceTree = "<group>"; };
 		F02D5E6DF29C397FCC673592 /* SelectCopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectCopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1DB3CC859082A18A9FDD601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA02D252FA2D071F7709C913 /* CopyFallbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyFallbackService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -70,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				EF5DB83B9152F85314DF48C8 /* AccessibilityClientTests.swift */,
+				79C25304CE4E29C564AF7ABF /* CopyFallbackServiceTests.swift */,
+				91D38FD501F5795647942096 /* PasteboardClientTests.swift */,
 				19135FD5B72494913CABA11D /* PermissionCoordinatorTests.swift */,
 				0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */,
 				42B68773B5AA6A1FD19DE2D3 /* SelectionMonitorTests.swift */,
@@ -96,6 +108,15 @@
 				7F8348C4B79D99A718C2AEBD /* SmokeUITests.swift */,
 			);
 			path = SelectCopyUITests;
+			sourceTree = "<group>";
+		};
+		54C9B4BD04CF421541417823 /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				FA02D252FA2D071F7709C913 /* CopyFallbackService.swift */,
+				2A89779FCF2B68629BF9B572 /* PasteboardClient.swift */,
+			);
+			path = Clipboard;
 			sourceTree = "<group>";
 		};
 		59E378E3BEFB0B699F949330 /* App */ = {
@@ -136,13 +157,23 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		A7B80411A734B1542EF9E808 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				B9B3DFFAFEB2C4E6CCF27B79 /* DelayScheduler.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		B21726016A83DD788D65BCE9 /* SelectCopy */ = {
 			isa = PBXGroup;
 			children = (
 				946EC5C05606F446A5826E9E /* Info.plist */,
 				6707609795D91B10ED3B583E /* Accessibility */,
 				59E378E3BEFB0B699F949330 /* App */,
+				54C9B4BD04CF421541417823 /* Clipboard */,
 				5F881740C32D492217092822 /* Monitoring */,
+				A7B80411A734B1542EF9E808 /* Support */,
 			);
 			path = SelectCopy;
 			sourceTree = "<group>";
@@ -255,7 +286,10 @@
 			files = (
 				8ADC7E69200DD03607DC00CD /* AccessibilityClient.swift in Sources */,
 				89251A25C7B818E2752424F6 /* AppDelegate.swift in Sources */,
+				BF1834D5D55EA74D3858FFA0 /* CopyFallbackService.swift in Sources */,
+				3A80482FA1054EEAC706EE7C /* DelayScheduler.swift in Sources */,
 				8F1888350580CDAA72FF7BFA /* InputEvent.swift in Sources */,
+				C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */,
 				226BDD798F4CA49E87CF878C /* PermissionCoordinator.swift in Sources */,
 				E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */,
 				42DA607AD2A41B91C6F84D9B /* SelectionGesture.swift in Sources */,
@@ -269,6 +303,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE7C33BC9572CB83898C162C /* AccessibilityClientTests.swift in Sources */,
+				47CE4292FAB45D72766DC6FE /* CopyFallbackServiceTests.swift in Sources */,
+				FE8DA501BB60F2BC6DC85D76 /* PasteboardClientTests.swift in Sources */,
 				5A301B09353EAF386F156682 /* PermissionCoordinatorTests.swift in Sources */,
 				4B086C708B5DFB2F027F9555 /* SelectionGestureClassifierTests.swift in Sources */,
 				44A48294CFE519335BB99101 /* SelectionMonitorTests.swift in Sources */,

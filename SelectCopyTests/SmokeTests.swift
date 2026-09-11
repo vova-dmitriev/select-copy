@@ -1,5 +1,5 @@
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 final class SmokeTests: XCTestCase {
     func testProductNameIsStable() {

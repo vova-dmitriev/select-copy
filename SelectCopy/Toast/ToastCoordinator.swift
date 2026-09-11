@@ -47,22 +47,22 @@ final class ToastCoordinator: CopyConfirmationPresenting {
     }
 
     func showCopyConfirmation(at screenPoint: CGPoint?) {
-        guard settings.settings.toastEnabled else {
+        guard self.settings.settings.toastEnabled else {
             return
         }
-        show(content: contentForCurrentSettings(), at: screenPoint)
+        self.show(content: self.contentForCurrentSettings(), at: screenPoint)
     }
 
     func showPreview() {
-        show(content: contentForCurrentSettings(), at: nil)
+        self.show(content: self.contentForCurrentSettings(), at: nil)
     }
 
     private func contentForCurrentSettings() -> ToastContent {
-        switch settings.settings.toastContentMode {
+        switch self.settings.settings.toastContentMode {
         case .localizedText:
-            return .text(localizer.text("toast.copied"))
+            return .text(self.localizer.text("toast.copied"))
         case .customText:
-            let text = settings.settings.customToastText
+            let text = self.settings.settings.customToastText
             return text.isEmpty ? .iconOnly : .text(text)
         case .iconOnly:
             return .iconOnly
@@ -74,16 +74,16 @@ final class ToastCoordinator: CopyConfirmationPresenting {
             return
         }
 
-        let frame = settings.settings.toastPosition.frame(
-            for: panel.contentSize,
+        let frame = self.settings.settings.toastPosition.frame(
+            for: self.panel.contentSize,
             in: screen.visibleFrame,
             inset: 20
         )
-        dismissalTask?.cancel()
-        panel.show(content: content, frame: frame)
-        dismissalTask = Task { [weak self] in
+        self.dismissalTask?.cancel()
+        self.panel.show(content: content, frame: frame)
+        self.dismissalTask = Task { [weak self] in
             do {
-                try await self?.scheduler.sleep(milliseconds: 1_200)
+                try await self?.scheduler.sleep(milliseconds: 1200)
             } catch {
                 return
             }

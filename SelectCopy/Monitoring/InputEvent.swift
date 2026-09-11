@@ -1,7 +1,7 @@
 import CoreGraphics
 
 struct InputEvent: Equatable, Sendable {
-    static let syntheticSourceMarker: Int64 = 0x5343_4F50_59
+    static let syntheticSourceMarker: Int64 = 0x53_434F_5059
 
     enum Kind: Equatable, Sendable {
         case mouseDown

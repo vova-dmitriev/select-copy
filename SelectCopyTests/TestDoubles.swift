@@ -11,12 +11,12 @@ final class AccessibilityTrustClientSpy: AccessibilityTrustClient {
     }
 
     func isTrusted(prompt: Bool) -> Bool {
-        promptValues.append(prompt)
-        return values.isEmpty ? false : values.removeFirst()
+        self.promptValues.append(prompt)
+        return self.values.isEmpty ? false : self.values.removeFirst()
     }
 
     func openPrivacySettings() {
-        openPrivacySettingsCallCount += 1
+        self.openPrivacySettingsCallCount += 1
     }
 }
 
@@ -32,24 +32,24 @@ final class EventTapClientSpy: EventTapServicing {
     var isEnabled = false
 
     func install(handler: @escaping (EventTapMessage) -> Void) -> Bool {
-        installCallCount += 1
+        self.installCallCount += 1
         self.handler = handler
-        let result = installResults.isEmpty ? false : installResults.removeFirst()
-        isEnabled = result
+        let result = self.installResults.isEmpty ? false : self.installResults.removeFirst()
+        self.isEnabled = result
         return result
     }
 
     func setEnabled(_ enabled: Bool) {
-        setEnabledValues.append(enabled)
-        isEnabled = enabled && enableSucceeds
+        self.setEnabledValues.append(enabled)
+        self.isEnabled = enabled && self.enableSucceeds
     }
 
     func invalidate() {
-        invalidateCallCount += 1
-        isEnabled = false
+        self.invalidateCallCount += 1
+        self.isEnabled = false
     }
 
     func emit(_ message: EventTapMessage) {
-        handler?(message)
+        self.handler?(message)
     }
 }

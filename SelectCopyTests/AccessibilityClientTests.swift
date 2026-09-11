@@ -1,17 +1,17 @@
 import ApplicationServices
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class AccessibilityClientTests: XCTestCase {
     func testReturnsSelectedTextWithoutNormalizingWhitespace() {
-        let reader = makeReader(role: "AXTextArea", selectedText: .value("  hello\n"))
+        let reader = self.makeReader(role: "AXTextArea", selectedText: .value("  hello\n"))
 
         XCTAssertEqual(reader.readSelection(), .text("  hello\n"))
     }
 
     func testEmptySelectedTextIsNotCopied() {
-        let reader = makeReader(role: "AXTextArea", selectedText: .value(""))
+        let reader = self.makeReader(role: "AXTextArea", selectedText: .value(""))
 
         XCTAssertEqual(reader.readSelection(), .empty)
     }
@@ -27,26 +27,26 @@ final class AccessibilityClientTests: XCTestCase {
 
     func testUnsupportedTextRolesAllowFallback() {
         for role in ["AXTextField", "AXTextArea", "AXStaticText", "AXWebArea", "AXDocument"] {
-            let reader = makeReader(role: role, selectedText: .error(.attributeUnsupported))
+            let reader = self.makeReader(role: role, selectedText: .error(.attributeUnsupported))
             XCTAssertEqual(reader.readSelection(), .unsupported(fallbackAllowed: true))
         }
     }
 
     func testUnsupportedNonTextRoleRejectsFallback() {
-        let reader = makeReader(role: "AXButton", selectedText: .error(.attributeUnsupported))
+        let reader = self.makeReader(role: "AXButton", selectedText: .error(.attributeUnsupported))
 
         XCTAssertEqual(reader.readSelection(), .unsupported(fallbackAllowed: false))
     }
 
     func testNoValueMeansNoSelection() {
-        let reader = makeReader(role: "AXTextArea", selectedText: .error(.noValue))
+        let reader = self.makeReader(role: "AXTextArea", selectedText: .error(.noValue))
 
         XCTAssertEqual(reader.readSelection(), .empty)
     }
 
     func testNotImplementedUsesRoleBasedFallbackDecision() {
-        let textReader = makeReader(role: "AXWebArea", selectedText: .error(.notImplemented))
-        let buttonReader = makeReader(role: "AXButton", selectedText: .error(.notImplemented))
+        let textReader = self.makeReader(role: "AXWebArea", selectedText: .error(.notImplemented))
+        let buttonReader = self.makeReader(role: "AXButton", selectedText: .error(.notImplemented))
 
         XCTAssertEqual(textReader.readSelection(), .unsupported(fallbackAllowed: true))
         XCTAssertEqual(buttonReader.readSelection(), .unsupported(fallbackAllowed: false))
@@ -75,6 +75,6 @@ private final class AccessibilityQuerySpy: AccessibilityQuerying {
     }
 
     func focusedElementSnapshot() -> AccessibilitySnapshotResult {
-        result
+        self.result
     }
 }

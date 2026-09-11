@@ -11,8 +11,8 @@ struct OnboardingView: View {
             Text("It watches text selection and copies it to the clipboard. No copy history is stored.")
                 .multilineTextAlignment(.center).foregroundStyle(.secondary)
             HStack {
-                Button("Allow access", action: requestAccess).keyboardShortcut(.defaultAction)
-                Button("Open System Settings", action: openSettings)
+                Button("Allow access", action: self.requestAccess).keyboardShortcut(.defaultAction)
+                Button("Open System Settings", action: self.openSettings)
             }
         }
         .padding(28).frame(width: 430)

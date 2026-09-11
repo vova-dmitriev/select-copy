@@ -6,7 +6,7 @@ final class SettingsStore: ObservableObject {
     static let storageKey = "settings.v1"
 
     @Published var settings: AppSettings {
-        didSet { save() }
+        didSet { self.save() }
     }
 
     private let userDefaults: UserDefaults
@@ -17,9 +17,9 @@ final class SettingsStore: ObservableObject {
         self.userDefaults = userDefaults
         if let data = userDefaults.data(forKey: Self.storageKey),
            let decoded = try? decoder.decode(AppSettings.self, from: data) {
-            settings = decoded
+            self.settings = decoded
         } else {
-            settings = .default
+            self.settings = .default
         }
     }
 
@@ -27,6 +27,6 @@ final class SettingsStore: ObservableObject {
         guard let data = try? encoder.encode(settings) else {
             return
         }
-        userDefaults.set(data, forKey: Self.storageKey)
+        self.userDefaults.set(data, forKey: Self.storageKey)
     }
 }

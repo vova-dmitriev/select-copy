@@ -24,6 +24,6 @@ struct AppSettings: Equatable, Codable, Sendable {
     )
 
     mutating func setCustomToastText(_ text: String) {
-        customToastText = String(text.prefix(60))
+        self.customToastText = String(text.prefix(60))
     }
 }

@@ -1,6 +1,6 @@
 import AppKit
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class PasteboardClientTests: XCTestCase {

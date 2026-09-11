@@ -1,13 +1,13 @@
 import CoreGraphics
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 final class SelectionGestureClassifierTests: XCTestCase {
     func testSingleClickBelowDragThresholdDoesNotProduceGesture() {
         var classifier = SelectionGestureClassifier(dragThreshold: 3)
 
-        _ = classifier.consume(mouseDown(at: .zero))
-        let gesture = classifier.consume(mouseUp(at: CGPoint(x: 2, y: 0)))
+        _ = classifier.consume(self.mouseDown(at: .zero))
+        let gesture = classifier.consume(self.mouseUp(at: CGPoint(x: 2, y: 0)))
 
         XCTAssertNil(gesture)
     }
@@ -16,8 +16,8 @@ final class SelectionGestureClassifierTests: XCTestCase {
         var classifier = SelectionGestureClassifier(dragThreshold: 3)
         let releasePoint = CGPoint(x: 3, y: 0)
 
-        _ = classifier.consume(mouseDown(at: .zero))
-        let gesture = classifier.consume(mouseUp(at: releasePoint))
+        _ = classifier.consume(self.mouseDown(at: .zero))
+        let gesture = classifier.consume(self.mouseUp(at: releasePoint))
 
         XCTAssertEqual(gesture, SelectionGesture(kind: .drag, screenPoint: releasePoint))
     }
@@ -27,8 +27,8 @@ final class SelectionGestureClassifierTests: XCTestCase {
             var classifier = SelectionGestureClassifier()
             let point = CGPoint(x: 40, y: 50)
 
-            _ = classifier.consume(mouseDown(at: point, clickCount: clickCount))
-            let gesture = classifier.consume(mouseUp(at: point, clickCount: clickCount))
+            _ = classifier.consume(self.mouseDown(at: point, clickCount: clickCount))
+            let gesture = classifier.consume(self.mouseUp(at: point, clickCount: clickCount))
 
             XCTAssertEqual(gesture, SelectionGesture(kind: .multiClick, screenPoint: point))
         }
@@ -39,7 +39,7 @@ final class SelectionGestureClassifierTests: XCTestCase {
 
         for keyCode in supportedKeyCodes {
             var classifier = SelectionGestureClassifier()
-            let gesture = classifier.consume(keyUp(keyCode: keyCode, flags: [.maskShift, .maskAlternate]))
+            let gesture = classifier.consume(self.keyUp(keyCode: keyCode, flags: [.maskShift, .maskAlternate]))
 
             XCTAssertEqual(gesture, SelectionGesture(kind: .keyboard, screenPoint: nil))
         }
@@ -48,7 +48,7 @@ final class SelectionGestureClassifierTests: XCTestCase {
     func testCommandAProducesSelectAllGesture() {
         var classifier = SelectionGestureClassifier()
 
-        let gesture = classifier.consume(keyUp(keyCode: 0, flags: [.maskCommand]))
+        let gesture = classifier.consume(self.keyUp(keyCode: 0, flags: [.maskCommand]))
 
         XCTAssertEqual(gesture, SelectionGesture(kind: .selectAll, screenPoint: nil))
     }
@@ -75,7 +75,7 @@ final class SelectionGestureClassifierTests: XCTestCase {
         )
 
         XCTAssertNil(classifier.consume(syntheticDown))
-        XCTAssertNil(classifier.consume(mouseUp(at: CGPoint(x: 20, y: 0))))
+        XCTAssertNil(classifier.consume(self.mouseUp(at: CGPoint(x: 20, y: 0))))
     }
 
     private func mouseDown(at point: CGPoint, clickCount: Int64 = 1) -> InputEvent {

@@ -40,9 +40,9 @@ struct SystemAccessibilityQuery: AccessibilityQuerying {
         let focusedElement = unsafeDowncast(focusedValue, to: AXUIElement.self)
         return .value(
             AccessibilityElementSnapshot(
-                role: optionalString(attribute: "AXRole", element: focusedElement),
-                subrole: optionalString(attribute: "AXSubrole", element: focusedElement),
-                selectedText: stringValue(attribute: "AXSelectedText", element: focusedElement)
+                role: self.optionalString(attribute: "AXRole", element: focusedElement),
+                subrole: self.optionalString(attribute: "AXSubrole", element: focusedElement),
+                selectedText: self.stringValue(attribute: "AXSelectedText", element: focusedElement)
             )
         )
     }
@@ -95,11 +95,11 @@ struct AccessibilitySelectionReader: SelectionReading {
     }
 
     func readSelection() -> SelectionReadResult {
-        switch query.focusedElementSnapshot() {
+        switch self.query.focusedElementSnapshot() {
         case let .error(error):
-            return .failure(error)
+            .failure(error)
         case let .value(snapshot):
-            return map(snapshot)
+            self.map(snapshot)
         }
     }
 

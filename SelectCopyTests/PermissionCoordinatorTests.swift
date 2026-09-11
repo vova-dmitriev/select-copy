@@ -1,5 +1,5 @@
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class PermissionCoordinatorTests: XCTestCase {

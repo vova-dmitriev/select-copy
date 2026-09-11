@@ -22,16 +22,16 @@ final class PasteboardClient: PasteboardServicing {
     }
 
     var changeCount: Int {
-        pasteboard.changeCount
+        self.pasteboard.changeCount
     }
 
     func writeText(_ text: String) -> Bool {
-        pasteboard.clearContents()
-        return pasteboard.setString(text, forType: .string)
+        self.pasteboard.clearContents()
+        return self.pasteboard.setString(text, forType: .string)
     }
 
     func readText() -> String? {
-        pasteboard.string(forType: .string)
+        self.pasteboard.string(forType: .string)
     }
 
     func snapshot() -> PasteboardSnapshot {
@@ -46,7 +46,7 @@ final class PasteboardClient: PasteboardServicing {
     }
 
     func restore(_ snapshot: PasteboardSnapshot) -> Bool {
-        pasteboard.clearContents()
+        self.pasteboard.clearContents()
         guard !snapshot.items.isEmpty else {
             return true
         }
@@ -58,6 +58,6 @@ final class PasteboardClient: PasteboardServicing {
             }
             return item
         }
-        return pasteboard.writeObjects(items)
+        return self.pasteboard.writeObjects(items)
     }
 }

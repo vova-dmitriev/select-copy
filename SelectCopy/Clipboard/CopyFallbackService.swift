@@ -70,22 +70,22 @@ final class CopyFallbackService: FallbackCopying {
     }
 
     func copySelection() async -> FallbackCopyResult {
-        let originalSnapshot = pasteboard.snapshot()
-        let originalChangeCount = pasteboard.changeCount
-        guard keyPoster.postCommandC() else {
+        let originalSnapshot = self.pasteboard.snapshot()
+        let originalChangeCount = self.pasteboard.changeCount
+        guard self.keyPoster.postCommandC() else {
             return .failed
         }
 
         do {
-            for _ in 0 ..< maximumPollCount {
-                if pasteboard.changeCount != originalChangeCount {
+            for _ in 0 ..< self.maximumPollCount {
+                if self.pasteboard.changeCount != originalChangeCount {
                     guard let text = pasteboard.readText(), !text.isEmpty else {
-                        _ = pasteboard.restore(originalSnapshot)
+                        _ = self.pasteboard.restore(originalSnapshot)
                         return .rejectedNonText
                     }
                     return .copied(text)
                 }
-                try await scheduler.sleep(milliseconds: pollIntervalMilliseconds)
+                try await self.scheduler.sleep(milliseconds: self.pollIntervalMilliseconds)
             }
             return .noChange
         } catch {

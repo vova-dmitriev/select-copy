@@ -7,7 +7,9 @@ final class ToastPanel: NSPanel, ToastPaneling {
 
     private static let toastContentSize = NSSize(width: 140, height: 38)
 
-    var contentSize: NSSize { Self.toastContentSize }
+    var contentSize: NSSize {
+        Self.toastContentSize
+    }
 
     init() {
         super.init(
@@ -25,12 +27,17 @@ final class ToastPanel: NSPanel, ToastPaneling {
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient, .ignoresCycle]
     }
 
-    override var canBecomeKey: Bool { false }
-    override var canBecomeMain: Bool { false }
+    override var canBecomeKey: Bool {
+        false
+    }
+
+    override var canBecomeMain: Bool {
+        false
+    }
 
     func show(content: ToastContent, frame: NSRect) {
         let view = NSHostingView(rootView: ToastView(content: content))
-        hostingView = view
+        self.hostingView = view
         contentView = view
         setFrame(frame, display: false)
         orderFrontRegardless()
@@ -44,11 +51,11 @@ final class ToastPanel: NSPanel, ToastPaneling {
 @MainActor
 final class SystemToastScreens: ToastScreenProviding {
     func screen(containing point: CGPoint) -> ToastScreen? {
-        NSScreen.screens.first { $0.frame.contains(point) }.map(makeScreen)
+        NSScreen.screens.first { $0.frame.contains(point) }.map(self.makeScreen)
     }
 
     var mainScreen: ToastScreen? {
-        NSScreen.main.map(makeScreen)
+        NSScreen.main.map(self.makeScreen)
     }
 
     private func makeScreen(_ screen: NSScreen) -> ToastScreen {

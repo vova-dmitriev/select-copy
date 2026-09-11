@@ -28,7 +28,7 @@ final class SystemLoginItemClient: LoginItemClient {
     private let service = SMAppService.mainApp
 
     var status: LoginItemSystemStatus {
-        switch service.status {
+        switch self.service.status {
         case .enabled: return .enabled
         case .notRegistered: return .notRegistered
         case .requiresApproval: return .requiresApproval
@@ -37,9 +37,17 @@ final class SystemLoginItemClient: LoginItemClient {
         }
     }
 
-    func register() throws { try service.register() }
-    func unregister() throws { try service.unregister() }
-    func openSettings() { SMAppService.openSystemSettingsLoginItems() }
+    func register() throws {
+        try self.service.register()
+    }
+
+    func unregister() throws {
+        try self.service.unregister()
+    }
+
+    func openSettings() {
+        SMAppService.openSystemSettingsLoginItems()
+    }
 }
 
 @MainActor
@@ -49,27 +57,33 @@ final class LoginItemService: ObservableObject {
 
     init(client: LoginItemClient = SystemLoginItemClient()) {
         self.client = client
-        state = Self.map(client.status)
+        self.state = Self.map(client.status)
     }
 
     func setEnabled(_ enabled: Bool) throws {
         do {
-            if enabled { try client.register() } else { try client.unregister() }
-            state = Self.map(client.status)
+            if enabled {
+                try self.client.register()
+            } else {
+                try self.client.unregister()
+            }
+            self.state = Self.map(self.client.status)
         } catch {
-            state = .unavailable(error.localizedDescription)
+            self.state = .unavailable(error.localizedDescription)
             throw error
         }
     }
 
-    func openSystemSettings() { client.openSettings() }
+    func openSystemSettings() {
+        self.client.openSettings()
+    }
 
     private static func map(_ status: LoginItemSystemStatus) -> LoginItemState {
         switch status {
-        case .enabled: return .enabled
-        case .notRegistered: return .disabled
-        case .requiresApproval: return .requiresApproval
-        case .notFound: return .unavailable("Login item is not available")
+        case .enabled: .enabled
+        case .notRegistered: .disabled
+        case .requiresApproval: .requiresApproval
+        case .notFound: .unavailable("Login item is not available")
         }
     }
 }

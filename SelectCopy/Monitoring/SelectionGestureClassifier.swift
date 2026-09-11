@@ -19,12 +19,12 @@ struct SelectionGestureClassifier {
 
         switch event.kind {
         case .mouseDown:
-            mouseDownLocation = event.location
+            self.mouseDownLocation = event.location
             return nil
         case .mouseUp:
-            return consumeMouseUp(event)
+            return self.consumeMouseUp(event)
         case .keyUp:
-            return consumeKeyUp(event)
+            return self.consumeKeyUp(event)
         }
     }
 
@@ -40,7 +40,7 @@ struct SelectionGestureClassifier {
         }
 
         let distance = hypot(event.location.x - mouseDownLocation.x, event.location.y - mouseDownLocation.y)
-        guard distance >= dragThreshold else {
+        guard distance >= self.dragThreshold else {
             return nil
         }
 

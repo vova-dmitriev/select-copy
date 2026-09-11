@@ -1,10 +1,10 @@
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class SettingsStoreTests: XCTestCase {
-    func testSettingsRoundTripThroughIsolatedDefaults() {
-        let defaults = UserDefaults(suiteName: UUID().uuidString)!
+    func testSettingsRoundTripThroughIsolatedDefaults() throws {
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: UUID().uuidString))
         let store = SettingsStore(userDefaults: defaults)
         var expected = AppSettings.default
         expected.launchAtLogin = true
@@ -20,8 +20,8 @@ final class SettingsStoreTests: XCTestCase {
         XCTAssertEqual(reloaded.settings, expected)
     }
 
-    func testCorruptDataFallsBackToDefaults() {
-        let defaults = UserDefaults(suiteName: UUID().uuidString)!
+    func testCorruptDataFallsBackToDefaults() throws {
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: UUID().uuidString))
         defaults.set(Data([1, 2, 3]), forKey: SettingsStore.storageKey)
 
         let store = SettingsStore(userDefaults: defaults)

@@ -28,7 +28,7 @@ final class SystemEventTapClient: EventTapServicing {
     }
 
     func install(handler: @escaping (EventTapMessage) -> Void) -> Bool {
-        invalidate()
+        self.invalidate()
         self.handler = handler
 
         let eventTypes: [CGEventType] = [.leftMouseDown, .leftMouseUp, .keyUp]
@@ -77,17 +77,17 @@ final class SystemEventTapClient: EventTapServicing {
         }
         runLoopSource = nil
         eventTap = nil
-        handler = nil
+        self.handler = nil
     }
 
     private func receive(_ message: EventTapMessage?) {
         guard let message else {
             return
         }
-        handler?(message)
+        self.handler?(message)
     }
 
-    nonisolated private static func normalize(event: CGEvent, kind: InputEvent.Kind) -> InputEvent {
+    private nonisolated static func normalize(event: CGEvent, kind: InputEvent.Kind) -> InputEvent {
         InputEvent(
             kind: kind,
             location: event.location,
@@ -98,20 +98,20 @@ final class SystemEventTapClient: EventTapServicing {
         )
     }
 
-    nonisolated private static func message(type: CGEventType, event: CGEvent) -> EventTapMessage? {
+    private nonisolated static func message(type: CGEventType, event: CGEvent) -> EventTapMessage? {
         switch type {
         case .tapDisabledByTimeout:
-            return .disabledByTimeout
+            .disabledByTimeout
         case .tapDisabledByUserInput:
-            return .disabledByUserInput
+            .disabledByUserInput
         case .leftMouseDown:
-            return .input(normalize(event: event, kind: .mouseDown))
+            .input(self.normalize(event: event, kind: .mouseDown))
         case .leftMouseUp:
-            return .input(normalize(event: event, kind: .mouseUp))
+            .input(self.normalize(event: event, kind: .mouseUp))
         case .keyUp:
-            return .input(normalize(event: event, kind: .keyUp))
+            .input(self.normalize(event: event, kind: .keyUp))
         default:
-            return nil
+            nil
         }
     }
 
@@ -154,30 +154,30 @@ final class SelectionMonitor: SelectionMonitoring {
     }
 
     func start(onGesture: @escaping (SelectionGesture) -> Void) throws {
-        guard !isRunning else {
+        guard !self.isRunning else {
             return
         }
 
         self.onGesture = onGesture
-        guard installTap() else {
+        guard self.installTap() else {
             self.onGesture = nil
             throw SelectionMonitorError.installationFailed
         }
-        isRunning = true
+        self.isRunning = true
     }
 
     func stop() {
-        guard isRunning else {
+        guard self.isRunning else {
             return
         }
-        eventTap.invalidate()
-        classifier = SelectionGestureClassifier()
-        onGesture = nil
-        isRunning = false
+        self.eventTap.invalidate()
+        self.classifier = SelectionGestureClassifier()
+        self.onGesture = nil
+        self.isRunning = false
     }
 
     private func installTap() -> Bool {
-        eventTap.install { [weak self] message in
+        self.eventTap.install { [weak self] message in
             self?.receive(message)
         }
     }
@@ -186,25 +186,25 @@ final class SelectionMonitor: SelectionMonitoring {
         switch message {
         case let .input(event):
             if let gesture = classifier.consume(event) {
-                onGesture?(gesture)
+                self.onGesture?(gesture)
             }
         case .disabledByTimeout, .disabledByUserInput:
-            recoverDisabledTap()
+            self.recoverDisabledTap()
         }
     }
 
     private func recoverDisabledTap() {
-        eventTap.setEnabled(true)
-        guard !eventTap.isEnabled else {
+        self.eventTap.setEnabled(true)
+        guard !self.eventTap.isEnabled else {
             return
         }
 
-        eventTap.invalidate()
-        isRunning = false
-        if installTap() {
-            isRunning = true
+        self.eventTap.invalidate()
+        self.isRunning = false
+        if self.installTap() {
+            self.isRunning = true
         } else {
-            onGesture = nil
+            self.onGesture = nil
         }
     }
 }

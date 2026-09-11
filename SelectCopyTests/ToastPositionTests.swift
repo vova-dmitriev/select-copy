@@ -1,6 +1,6 @@
 import AppKit
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 final class ToastPositionTests: XCTestCase {
     func testAllPositionsUseVisibleFrameInsets() {

@@ -34,6 +34,7 @@
 		B38C39467EDCA40B4D8409E2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F453DE59B54064B4B4EF0394 /* SettingsView.swift */; };
 		B8C869B730696A5F622B6089 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69767D9EACB5C270D62AE16 /* SettingsStore.swift */; };
 		BC1E6E8C8112D840D4D870B1 /* ToastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18154775A475BCC22C3938E8 /* ToastCoordinator.swift */; };
+		BD5E9C79DD853D4095505200 /* OnboardingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F7FCF5C5A7DDDCD81E7FC /* OnboardingWindowController.swift */; };
 		BF1834D5D55EA74D3858FFA0 /* CopyFallbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02D252FA2D071F7709C913 /* CopyFallbackService.swift */; };
 		C3990571B44F077C3E8B1455 /* LoginItemServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F43A01D32833FE7201934 /* LoginItemServiceTests.swift */; };
 		C68CFEE61C70470C2907A5DB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3784794BE439293554F93 /* OnboardingView.swift */; };
@@ -97,6 +98,7 @@
 		8E62D3F73D1E876629D2373C /* TestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDoubles.swift; sourceTree = "<group>"; };
 		91D38FD501F5795647942096 /* PasteboardClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardClientTests.swift; sourceTree = "<group>"; };
 		946EC5C05606F446A5826E9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9A0F7FCF5C5A7DDDCD81E7FC /* OnboardingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWindowController.swift; sourceTree = "<group>"; };
 		9ACB8E01CB6C236FAFCD30E9 /* SelectionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMonitor.swift; sourceTree = "<group>"; };
 		A51F43A01D32833FE7201934 /* LoginItemServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemServiceTests.swift; sourceTree = "<group>"; };
 		ABDA1DB0DCC6957A21F69CAE /* ToastCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastCoordinatorTests.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				D8E3784794BE439293554F93 /* OnboardingView.swift */,
+				9A0F7FCF5C5A7DDDCD81E7FC /* OnboardingWindowController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				DFAAF1E7843A4934BEC2D2CB /* Localizer.swift in Sources */,
 				DD5E6716656FDFEEFC690F02 /* LoginItemService.swift in Sources */,
 				C68CFEE61C70470C2907A5DB /* OnboardingView.swift in Sources */,
+				BD5E9C79DD853D4095505200 /* OnboardingWindowController.swift in Sources */,
 				C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */,
 				226BDD798F4CA49E87CF878C /* PermissionCoordinator.swift in Sources */,
 				E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */,

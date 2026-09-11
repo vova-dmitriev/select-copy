@@ -1,6 +1,6 @@
 import AppKit
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class CopyFallbackServiceTests: XCTestCase {
@@ -94,7 +94,7 @@ private final class PasteboardServiceFake: PasteboardServicing {
     }
 
     func writeText(_ text: String) -> Bool {
-        replaceWithText(text)
+        self.replaceWithText(text)
         return true
     }
 
@@ -106,24 +106,24 @@ private final class PasteboardServiceFake: PasteboardServicing {
     }
 
     func snapshot() -> PasteboardSnapshot {
-        PasteboardSnapshot(items: items)
+        PasteboardSnapshot(items: self.items)
     }
 
     func restore(_ snapshot: PasteboardSnapshot) -> Bool {
-        restoreCallCount += 1
-        items = snapshot.items
-        changeCount += 1
+        self.restoreCallCount += 1
+        self.items = snapshot.items
+        self.changeCount += 1
         return true
     }
 
     func replaceWithText(_ text: String) {
-        items = [["public.utf8-plain-text": Data(text.utf8)]]
-        changeCount += 1
+        self.items = [["public.utf8-plain-text": Data(text.utf8)]]
+        self.changeCount += 1
     }
 
     func replaceWithNonText() {
-        items = [["public.png": Data([1, 2, 3])]]
-        changeCount += 1
+        self.items = [["public.png": Data([1, 2, 3])]]
+        self.changeCount += 1
     }
 }
 
@@ -138,8 +138,8 @@ private struct KeyEventPosterFake: KeyEventPosting {
 
     @MainActor
     func postCommandC() -> Bool {
-        onPost()
-        return succeeds
+        self.onPost()
+        return self.succeeds
     }
 }
 
@@ -148,6 +148,6 @@ private final class ImmediateDelayScheduler: DelayScheduling {
     private(set) var sleepCallCount = 0
 
     func sleep(milliseconds _: UInt64) async throws {
-        sleepCallCount += 1
+        self.sleepCallCount += 1
     }
 }

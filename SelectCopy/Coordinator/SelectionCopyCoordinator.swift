@@ -29,39 +29,39 @@ final class SelectionCopyCoordinator {
     }
 
     func handle(_ gesture: SelectionGesture) {
-        pendingTask?.cancel()
-        pendingTask = Task { [weak self] in
+        self.pendingTask?.cancel()
+        self.pendingTask = Task { [weak self] in
             guard let self else {
                 return
             }
 
             do {
-                try await scheduler.sleep(milliseconds: 100)
+                try await self.scheduler.sleep(milliseconds: 100)
             } catch {
                 return
             }
             guard !Task.isCancelled else {
                 return
             }
-            await performCopy(for: gesture)
+            await self.performCopy(for: gesture)
         }
     }
 
     func cancelPendingCopy() {
-        pendingTask?.cancel()
-        pendingTask = nil
+        self.pendingTask?.cancel()
+        self.pendingTask = nil
     }
 
     private func performCopy(for gesture: SelectionGesture) async {
-        switch selectionReader.readSelection() {
+        switch self.selectionReader.readSelection() {
         case let .text(text):
-            guard pasteboard.writeText(text) else {
+            guard self.pasteboard.writeText(text) else {
                 return
             }
-            presenter?.showCopyConfirmation(at: gesture.screenPoint)
+            self.presenter?.showCopyConfirmation(at: gesture.screenPoint)
         case .unsupported(fallbackAllowed: true):
-            if case .copied = await fallback.copySelection() {
-                presenter?.showCopyConfirmation(at: gesture.screenPoint)
+            if case .copied = await self.fallback.copySelection() {
+                self.presenter?.showCopyConfirmation(at: gesture.screenPoint)
             }
         case .empty, .secure, .unsupported(fallbackAllowed: false), .failure:
             return

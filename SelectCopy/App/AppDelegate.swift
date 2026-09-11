@@ -5,12 +5,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let container = AppContainer()
     let loginItem = LoginItemService()
     let settingsWindow = SettingsWindowController()
+    let onboardingWindow = OnboardingWindowController()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        container.start()
+        self.container.start()
+        if !self.container.permission.isTrusted {
+            self.onboardingWindow.show(permission: self.container.permission)
+        }
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        container.shutdown()
+        self.container.shutdown()
     }
 }

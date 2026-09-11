@@ -1,6 +1,6 @@
 import CoreGraphics
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class SelectionMonitorTests: XCTestCase {

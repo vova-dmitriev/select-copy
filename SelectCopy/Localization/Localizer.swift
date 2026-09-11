@@ -5,9 +5,10 @@ import Foundation
 final class Localizer: ObservableObject {
     @Published var language: AppLanguage {
         didSet {
-            localeIdentifier = language.localeIdentifier(system: systemLocaleIdentifier)
+            self.localeIdentifier = self.language.localeIdentifier(system: self.systemLocaleIdentifier)
         }
     }
+
     @Published private(set) var localeIdentifier: String
 
     private let systemLocaleIdentifier: String
@@ -33,7 +34,7 @@ final class Localizer: ObservableObject {
     init(language: AppLanguage, systemLocaleIdentifier: String = Locale.current.identifier) {
         self.language = language
         self.systemLocaleIdentifier = systemLocaleIdentifier
-        localeIdentifier = language.localeIdentifier(system: systemLocaleIdentifier)
+        self.localeIdentifier = language.localeIdentifier(system: systemLocaleIdentifier)
     }
 
     func setLanguage(_ language: AppLanguage) {
@@ -41,7 +42,7 @@ final class Localizer: ObservableObject {
     }
 
     func text(_ key: String) -> String {
-        let languageCode = localeIdentifier.lowercased().hasPrefix("ru") ? "ru" : "en"
+        let languageCode = self.localeIdentifier.lowercased().hasPrefix("ru") ? "ru" : "en"
         return Self.translations[key]?[languageCode] ?? key
     }
 }

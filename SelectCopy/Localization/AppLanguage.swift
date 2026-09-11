@@ -8,11 +8,11 @@ enum AppLanguage: String, CaseIterable, Codable, Sendable {
     func localeIdentifier(system: String) -> String {
         switch self {
         case .system:
-            return system
+            system
         case .russian:
-            return "ru"
+            "ru"
         case .english:
-            return "en"
+            "en"
         }
     }
 }

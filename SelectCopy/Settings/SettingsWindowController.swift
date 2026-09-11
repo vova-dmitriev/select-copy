@@ -6,8 +6,16 @@ final class SettingsWindowController: NSObject {
     private var window: NSWindow?
 
     func show(store: SettingsStore, localizer: Localizer, loginItem: LoginItemService, preview: @escaping () -> Void) {
-        if let window { window.makeKeyAndOrderFront(nil); return }
-        let controller = NSHostingController(rootView: SettingsView(store: store, localizer: localizer, loginItem: loginItem, showPreview: preview))
+        if let window {
+            window.makeKeyAndOrderFront(nil); return
+        }
+        let view = SettingsView(
+            store: store,
+            localizer: localizer,
+            loginItem: loginItem,
+            showPreview: preview
+        )
+        let controller = NSHostingController(rootView: view)
         let window = NSWindow(contentViewController: controller)
         window.title = "SelectCopy"
         window.styleMask = [.titled, .closable]
@@ -20,5 +28,7 @@ final class SettingsWindowController: NSObject {
 }
 
 extension SettingsWindowController: NSWindowDelegate {
-    func windowWillClose(_ notification: Notification) { window = nil }
+    func windowWillClose(_ notification: Notification) {
+        self.window = nil
+    }
 }

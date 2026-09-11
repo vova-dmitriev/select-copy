@@ -40,22 +40,26 @@ final class AppContainer: ObservableObject {
     }
 
     func start() {
-        guard !started else { return }
-        started = true
-        guard permission.isTrusted else { return }
-        try? monitor.start { [weak self] gesture in
+        guard !self.started else { return }
+        self.started = true
+        guard self.permission.isTrusted else { return }
+        try? self.monitor.start { [weak self] gesture in
             self?.copyCoordinator.handle(gesture)
         }
     }
 
     func shutdown() {
-        monitor.stop()
-        copyCoordinator.cancelPendingCopy()
-        started = false
+        self.monitor.stop()
+        self.copyCoordinator.cancelPendingCopy()
+        self.started = false
     }
 
     func refreshPermission() {
-        permission.refresh()
-        if permission.isTrusted { start() } else { monitor.stop(); copyCoordinator.cancelPendingCopy() }
+        self.permission.refresh()
+        if self.permission.isTrusted {
+            self.start()
+        } else {
+            self.monitor.stop(); self.copyCoordinator.cancelPendingCopy()
+        }
     }
 }

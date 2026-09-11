@@ -1,6 +1,6 @@
 import CoreGraphics
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class SelectionCopyCoordinatorTests: XCTestCase {
@@ -9,7 +9,7 @@ final class SelectionCopyCoordinatorTests: XCTestCase {
         let point = CGPoint(x: 50, y: 60)
 
         fixture.coordinator.handle(SelectionGesture(kind: .drag, screenPoint: point))
-        await waitUntil { fixture.presenter.points.count == 1 }
+        await self.waitUntil { fixture.presenter.points.count == 1 }
 
         XCTAssertEqual(fixture.pasteboard.writtenTexts, ["hello"])
         XCTAssertEqual(fixture.presenter.points, [point])
@@ -23,7 +23,7 @@ final class SelectionCopyCoordinatorTests: XCTestCase {
         )
 
         fixture.coordinator.handle(SelectionGesture(kind: .keyboard, screenPoint: nil))
-        await waitUntil { fixture.presenter.points.count == 1 }
+        await self.waitUntil { fixture.presenter.points.count == 1 }
 
         XCTAssertTrue(fixture.pasteboard.writtenTexts.isEmpty)
         XCTAssertEqual(fixture.fallback.callCount, 1)
@@ -42,7 +42,7 @@ final class SelectionCopyCoordinatorTests: XCTestCase {
         for result in results {
             let fixture = CoordinatorFixture(readResult: result)
             fixture.coordinator.handle(SelectionGesture(kind: .drag, screenPoint: .zero))
-            await settleTasks()
+            await self.settleTasks()
 
             XCTAssertTrue(fixture.pasteboard.writtenTexts.isEmpty)
             XCTAssertEqual(fixture.fallback.callCount, 0)
@@ -54,7 +54,7 @@ final class SelectionCopyCoordinatorTests: XCTestCase {
         let fixture = CoordinatorFixture(readResult: .text("hello"), writeSucceeds: false)
 
         fixture.coordinator.handle(SelectionGesture(kind: .drag, screenPoint: .zero))
-        await settleTasks()
+        await self.settleTasks()
 
         XCTAssertEqual(fixture.pasteboard.writtenTexts, ["hello"])
         XCTAssertEqual(fixture.fallback.callCount, 0)
@@ -66,9 +66,9 @@ final class SelectionCopyCoordinatorTests: XCTestCase {
         let gesture = SelectionGesture(kind: .multiClick, screenPoint: .zero)
 
         fixture.coordinator.handle(gesture)
-        await waitUntil { fixture.presenter.points.count == 1 }
+        await self.waitUntil { fixture.presenter.points.count == 1 }
         fixture.coordinator.handle(gesture)
-        await waitUntil { fixture.presenter.points.count == 2 }
+        await self.waitUntil { fixture.presenter.points.count == 2 }
 
         XCTAssertEqual(fixture.pasteboard.writtenTexts, ["same", "same"])
     }
@@ -111,13 +111,13 @@ private final class CoordinatorFixture {
         writeSucceeds: Bool = true,
         scheduler: DelayScheduling = ZeroDelayScheduler()
     ) {
-        pasteboard = CoordinatorPasteboardSpy(writeSucceeds: writeSucceeds)
-        fallback = CoordinatorFallbackSpy(result: fallbackResult)
-        coordinator = SelectionCopyCoordinator(
+        self.pasteboard = CoordinatorPasteboardSpy(writeSucceeds: writeSucceeds)
+        self.fallback = CoordinatorFallbackSpy(result: fallbackResult)
+        self.coordinator = SelectionCopyCoordinator(
             selectionReader: FixedSelectionReader(result: readResult),
-            pasteboard: pasteboard,
-            fallback: fallback,
-            presenter: presenter,
+            pasteboard: self.pasteboard,
+            fallback: self.fallback,
+            presenter: self.presenter,
             scheduler: scheduler
         )
     }
@@ -127,7 +127,7 @@ private struct FixedSelectionReader: SelectionReading {
     let result: SelectionReadResult
 
     func readSelection() -> SelectionReadResult {
-        result
+        self.result
     }
 }
 
@@ -142,13 +142,21 @@ private final class CoordinatorPasteboardSpy: PasteboardServicing {
     }
 
     func writeText(_ text: String) -> Bool {
-        writtenTexts.append(text)
-        return writeSucceeds
+        self.writtenTexts.append(text)
+        return self.writeSucceeds
     }
 
-    func readText() -> String? { nil }
-    func snapshot() -> PasteboardSnapshot { PasteboardSnapshot(items: []) }
-    func restore(_: PasteboardSnapshot) -> Bool { true }
+    func readText() -> String? {
+        nil
+    }
+
+    func snapshot() -> PasteboardSnapshot {
+        PasteboardSnapshot(items: [])
+    }
+
+    func restore(_: PasteboardSnapshot) -> Bool {
+        true
+    }
 }
 
 @MainActor
@@ -161,8 +169,8 @@ private final class CoordinatorFallbackSpy: FallbackCopying {
     }
 
     func copySelection() async -> FallbackCopyResult {
-        callCount += 1
-        return result
+        self.callCount += 1
+        return self.result
     }
 }
 
@@ -171,7 +179,7 @@ private final class CoordinatorPresenterSpy: CopyConfirmationPresenting {
     private(set) var points: [CGPoint?] = []
 
     func showCopyConfirmation(at screenPoint: CGPoint?) {
-        points.append(screenPoint)
+        self.points.append(screenPoint)
     }
 }
 

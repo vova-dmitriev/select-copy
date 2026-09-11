@@ -1,5 +1,5 @@
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 final class AppLanguageTests: XCTestCase {
     func testExplicitLanguagesResolveToStableIdentifiers() {

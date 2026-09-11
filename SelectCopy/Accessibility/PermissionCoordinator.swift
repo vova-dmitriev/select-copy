@@ -37,18 +37,18 @@ final class PermissionCoordinator: ObservableObject {
 
     init(trustClient: AccessibilityTrustClient = SystemAccessibilityTrustClient()) {
         self.trustClient = trustClient
-        isTrusted = trustClient.isTrusted(prompt: false)
+        self.isTrusted = trustClient.isTrusted(prompt: false)
     }
 
     func refresh() {
-        isTrusted = trustClient.isTrusted(prompt: false)
+        self.isTrusted = self.trustClient.isTrusted(prompt: false)
     }
 
     func requestAccess() {
-        isTrusted = trustClient.isTrusted(prompt: true)
+        self.isTrusted = self.trustClient.isTrusted(prompt: true)
     }
 
     func openSystemSettings() {
-        trustClient.openPrivacySettings()
+        self.trustClient.openPrivacySettings()
     }
 }

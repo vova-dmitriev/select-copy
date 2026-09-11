@@ -1,5 +1,5 @@
-import XCTest
 @testable import SelectCopy
+import XCTest
 
 @MainActor
 final class LoginItemServiceTests: XCTestCase {
@@ -34,7 +34,9 @@ final class LoginItemServiceTests: XCTestCase {
 
 private enum TestError: LocalizedError {
     case failed
-    var errorDescription: String? { "failed" }
+    var errorDescription: String? {
+        "failed"
+    }
 }
 
 @MainActor
@@ -50,14 +52,16 @@ private final class LoginItemClientSpy: LoginItemClient {
     }
 
     func register() throws {
-        registerCallCount += 1
-        if let registerError { throw registerError }
-        status = .enabled
+        self.registerCallCount += 1
+        if let registerError {
+            throw registerError
+        }
+        self.status = .enabled
     }
 
     func unregister() throws {
-        unregisterCallCount += 1
-        status = .notRegistered
+        self.unregisterCallCount += 1
+        self.status = .notRegistered
     }
 
     func openSettings() {}

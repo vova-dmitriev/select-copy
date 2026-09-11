@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42DA607AD2A41B91C6F84D9B /* SelectionGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D344A8722B3F63D7E4E17F /* SelectionGesture.swift */; };
+		4B086C708B5DFB2F027F9555 /* SelectionGestureClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */; };
 		54403B545D94633C5B36C74A /* SmokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8348C4B79D99A718C2AEBD /* SmokeUITests.swift */; };
+		6A451D23C5AEABD5F63760EC /* SelectionGestureClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9782AB912727B415B5DC2 /* SelectionGestureClassifier.swift */; };
 		89251A25C7B818E2752424F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB3CC859082A18A9FDD601 /* AppDelegate.swift */; };
+		8F1888350580CDAA72FF7BFA /* InputEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52535D259E597D830EF236B /* InputEvent.swift */; };
 		E27BD54D25AA27DAB5A673E3 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */; };
 		E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6782DC2D3A8034C1817FC4EE /* SelectCopyApp.swift */; };
 /* End PBXBuildFile section */
@@ -31,14 +35,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureClassifierTests.swift; sourceTree = "<group>"; };
 		1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		2F83BB1E44E6FED733F0AF0D /* SelectCopyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectCopyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		416F1E51149A0E183133B913 /* SelectCopyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SelectCopyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6782DC2D3A8034C1817FC4EE /* SelectCopyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCopyApp.swift; sourceTree = "<group>"; };
 		7F8348C4B79D99A718C2AEBD /* SmokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeUITests.swift; sourceTree = "<group>"; };
 		83254A5DB2DC24EBEDAE9158 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		89E9782AB912727B415B5DC2 /* SelectionGestureClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureClassifier.swift; sourceTree = "<group>"; };
 		946EC5C05606F446A5826E9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B7D344A8722B3F63D7E4E17F /* SelectionGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGesture.swift; sourceTree = "<group>"; };
 		BC6DA3997FDFD70FF7C2A25C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		E52535D259E597D830EF236B /* InputEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEvent.swift; sourceTree = "<group>"; };
 		F02D5E6DF29C397FCC673592 /* SelectCopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectCopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1DB3CC859082A18A9FDD601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,6 +55,7 @@
 		154ABE689ABA8CFD614E76AF /* SelectCopyTests */ = {
 			isa = PBXGroup;
 			children = (
+				0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */,
 				1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */,
 			);
 			path = SelectCopyTests;
@@ -80,6 +89,16 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		5F881740C32D492217092822 /* Monitoring */ = {
+			isa = PBXGroup;
+			children = (
+				E52535D259E597D830EF236B /* InputEvent.swift */,
+				B7D344A8722B3F63D7E4E17F /* SelectionGesture.swift */,
+				89E9782AB912727B415B5DC2 /* SelectionGestureClassifier.swift */,
+			);
+			path = Monitoring;
+			sourceTree = "<group>";
+		};
 		8901616EA5261AE3DA71FCDC /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +113,7 @@
 			children = (
 				946EC5C05606F446A5826E9E /* Info.plist */,
 				59E378E3BEFB0B699F949330 /* App */,
+				5F881740C32D492217092822 /* Monitoring */,
 			);
 			path = SelectCopy;
 			sourceTree = "<group>";
@@ -205,7 +225,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				89251A25C7B818E2752424F6 /* AppDelegate.swift in Sources */,
+				8F1888350580CDAA72FF7BFA /* InputEvent.swift in Sources */,
 				E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */,
+				42DA607AD2A41B91C6F84D9B /* SelectionGesture.swift in Sources */,
+				6A451D23C5AEABD5F63760EC /* SelectionGestureClassifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B086C708B5DFB2F027F9555 /* SelectionGestureClassifierTests.swift in Sources */,
 				E27BD54D25AA27DAB5A673E3 /* SmokeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

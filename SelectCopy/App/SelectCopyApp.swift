@@ -11,7 +11,7 @@ struct SelectCopyApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra(ProductIdentity.name, systemImage: "clipboard") {
+        MenuBarExtra(ProductIdentity.name, systemImage: "checkmark.square.fill") {
             Text(self.appDelegate.container.permission.isTrusted ? "Active" : "Accessibility permission required")
             Divider()
             Button("Settings") {

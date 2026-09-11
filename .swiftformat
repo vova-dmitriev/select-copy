@@ -1,0 +1,4 @@
+--swiftversion 6.0
+--indent 4
+--self insert
+--stripunusedargs closure-only

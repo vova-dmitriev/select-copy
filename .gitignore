@@ -1,0 +1,8 @@
+.DS_Store
+.worktrees/
+DerivedData/
+build/
+*.xcarchive
+*.dSYM.zip
+*.app.zip
+release/

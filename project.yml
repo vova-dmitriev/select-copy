@@ -1,0 +1,56 @@
+name: SelectCopy
+options:
+  minimumXcodeGenVersion: 2.42.0
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    MACOSX_DEPLOYMENT_TARGET: 13.0
+    SWIFT_VERSION: 6.0
+    PRODUCT_BUNDLE_IDENTIFIER: com.selectcopy.app
+    ARCHS: "arm64 x86_64"
+targets:
+  SelectCopy:
+    type: application
+    platform: macOS
+    sources: [SelectCopy]
+    info:
+      path: SelectCopy/Info.plist
+      properties:
+        CFBundleDisplayName: SelectCopy
+        LSUIElement: true
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+  SelectCopyTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [SelectCopyTests]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        MACOSX_DEPLOYMENT_TARGET: 14.0
+    dependencies:
+      - target: SelectCopy
+  SelectCopyUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources: [SelectCopyUITests]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        MACOSX_DEPLOYMENT_TARGET: 14.0
+    dependencies:
+      - target: SelectCopy
+schemes:
+  SelectCopy:
+    build:
+      targets:
+        SelectCopy: all
+        SelectCopyTests: [test]
+        SelectCopyUITests: [test]
+    test:
+      targets:
+        - SelectCopyTests
+        - SelectCopyUITests

@@ -1,0 +1,14 @@
+included:
+  - SelectCopy
+  - SelectCopyTests
+  - SelectCopyUITests
+opt_in_rules:
+  - empty_count
+  - first_where
+  - force_unwrapping
+  - sorted_imports
+line_length:
+  warning: 120
+  error: 160
+identifier_name:
+  excluded: [id, x, y]

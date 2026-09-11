@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2257E3A0CE7232DB19084E /* SelectionCopyCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0606D363C692C3DEAAC8AE4F /* SelectionCopyCoordinatorTests.swift */; };
 		226BDD798F4CA49E87CF878C /* PermissionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A43A34C28090EB335EBAE3 /* PermissionCoordinator.swift */; };
 		3A80482FA1054EEAC706EE7C /* DelayScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B3DFFAFEB2C4E6CCF27B79 /* DelayScheduler.swift */; };
 		4230E28ACABEDDB131DC6405 /* SelectionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACB8E01CB6C236FAFCD30E9 /* SelectionMonitor.swift */; };
@@ -20,6 +21,7 @@
 		6A451D23C5AEABD5F63760EC /* SelectionGestureClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9782AB912727B415B5DC2 /* SelectionGestureClassifier.swift */; };
 		89251A25C7B818E2752424F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB3CC859082A18A9FDD601 /* AppDelegate.swift */; };
 		8ADC7E69200DD03607DC00CD /* AccessibilityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59325386B871FCC02EC7A50A /* AccessibilityClient.swift */; };
+		8B8410697EC3B764D7348A72 /* SelectionCopyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C88E2943AB704BA305E950 /* SelectionCopyCoordinator.swift */; };
 		8F1888350580CDAA72FF7BFA /* InputEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52535D259E597D830EF236B /* InputEvent.swift */; };
 		BF1834D5D55EA74D3858FFA0 /* CopyFallbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02D252FA2D071F7709C913 /* CopyFallbackService.swift */; };
 		C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89779FCF2B68629BF9B572 /* PasteboardClient.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0606D363C692C3DEAAC8AE4F /* SelectionCopyCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCopyCoordinatorTests.swift; sourceTree = "<group>"; };
+		08C88E2943AB704BA305E950 /* SelectionCopyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCopyCoordinator.swift; sourceTree = "<group>"; };
 		0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureClassifierTests.swift; sourceTree = "<group>"; };
 		19135FD5B72494913CABA11D /* PermissionCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCoordinatorTests.swift; sourceTree = "<group>"; };
 		1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 				79C25304CE4E29C564AF7ABF /* CopyFallbackServiceTests.swift */,
 				91D38FD501F5795647942096 /* PasteboardClientTests.swift */,
 				19135FD5B72494913CABA11D /* PermissionCoordinatorTests.swift */,
+				0606D363C692C3DEAAC8AE4F /* SelectionCopyCoordinatorTests.swift */,
 				0FF22DC2A3F14F770455B14F /* SelectionGestureClassifierTests.swift */,
 				42B68773B5AA6A1FD19DE2D3 /* SelectionMonitorTests.swift */,
 				1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */,
@@ -148,6 +153,14 @@
 			path = Accessibility;
 			sourceTree = "<group>";
 		};
+		72DEE1708FC12509CA791107 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				08C88E2943AB704BA305E950 /* SelectionCopyCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		8901616EA5261AE3DA71FCDC /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +185,7 @@
 				6707609795D91B10ED3B583E /* Accessibility */,
 				59E378E3BEFB0B699F949330 /* App */,
 				54C9B4BD04CF421541417823 /* Clipboard */,
+				72DEE1708FC12509CA791107 /* Coordinator */,
 				5F881740C32D492217092822 /* Monitoring */,
 				A7B80411A734B1542EF9E808 /* Support */,
 			);
@@ -292,6 +306,7 @@
 				C86115B7749E82A4B7C5060D /* PasteboardClient.swift in Sources */,
 				226BDD798F4CA49E87CF878C /* PermissionCoordinator.swift in Sources */,
 				E3C375C8FB4B4CBD9A162DDD /* SelectCopyApp.swift in Sources */,
+				8B8410697EC3B764D7348A72 /* SelectionCopyCoordinator.swift in Sources */,
 				42DA607AD2A41B91C6F84D9B /* SelectionGesture.swift in Sources */,
 				6A451D23C5AEABD5F63760EC /* SelectionGestureClassifier.swift in Sources */,
 				4230E28ACABEDDB131DC6405 /* SelectionMonitor.swift in Sources */,
@@ -306,6 +321,7 @@
 				47CE4292FAB45D72766DC6FE /* CopyFallbackServiceTests.swift in Sources */,
 				FE8DA501BB60F2BC6DC85D76 /* PasteboardClientTests.swift in Sources */,
 				5A301B09353EAF386F156682 /* PermissionCoordinatorTests.swift in Sources */,
+				0D2257E3A0CE7232DB19084E /* SelectionCopyCoordinatorTests.swift in Sources */,
 				4B086C708B5DFB2F027F9555 /* SelectionGestureClassifierTests.swift in Sources */,
 				44A48294CFE519335BB99101 /* SelectionMonitorTests.swift in Sources */,
 				E27BD54D25AA27DAB5A673E3 /* SmokeTests.swift in Sources */,

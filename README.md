@@ -8,7 +8,7 @@ SelectCopy is a small macOS menu-bar utility that copies text immediately after 
 
 Configure the notification, toast position, text, language, and launch at login.
 
-![SelectCopy settings](docs/screenshots/settings.png)
+![SelectCopy settings](docs/screenshots/settings.jpg)
 
 ## Requirements
 

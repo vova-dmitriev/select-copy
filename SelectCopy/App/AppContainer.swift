@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import OSLog
 
 @MainActor
 final class AppContainer: ObservableObject {
@@ -14,6 +15,7 @@ final class AppContainer: ObservableObject {
     private var monitorStarted = false
     private var permissionObservation: AnyCancellable?
     private var permissionRefreshTask: Task<Void, Never>?
+    private let logger = Logger(subsystem: "com.selectcopy.app", category: "monitor")
 
     init(
         settings: SettingsStore = SettingsStore(),
@@ -84,8 +86,10 @@ final class AppContainer: ObservableObject {
                     self?.copyCoordinator.handle(gesture)
                 }
                 self.monitorStarted = true
+                logger.notice("Selection monitor started")
             } catch {
                 self.monitorStarted = false
+                logger.error("Selection event tap installation failed")
             }
         } else if self.monitorStarted {
             self.monitor.stop()

@@ -1,4 +1,5 @@
 import CoreGraphics
+import OSLog
 
 @MainActor
 protocol CopyConfirmationPresenting: AnyObject {
@@ -13,6 +14,7 @@ final class SelectionCopyCoordinator {
     private weak var presenter: CopyConfirmationPresenting?
     private let scheduler: DelayScheduling
     private var pendingTask: Task<Void, Never>?
+    private let logger = Logger(subsystem: "com.selectcopy.app", category: "copy")
 
     init(
         selectionReader: SelectionReading,
@@ -29,6 +31,7 @@ final class SelectionCopyCoordinator {
     }
 
     func handle(_ gesture: SelectionGesture) {
+        logger.notice("Received selection gesture")
         self.pendingTask?.cancel()
         self.pendingTask = Task { [weak self] in
             guard let self else {
@@ -53,17 +56,20 @@ final class SelectionCopyCoordinator {
     }
 
     private func performCopy(for gesture: SelectionGesture) async {
-        switch self.selectionReader.readSelection() {
+        switch self.selectionReader.readSelection(at: gesture.screenPoint) {
         case let .text(text):
+            logger.notice("Accessibility returned selected text")
             guard self.pasteboard.writeText(text) else {
                 return
             }
             self.presenter?.showCopyConfirmation(at: gesture.screenPoint)
         case .unsupported(fallbackAllowed: true):
+            logger.notice("Attempting Command-C fallback")
             if case .copied = await self.fallback.copySelection() {
                 self.presenter?.showCopyConfirmation(at: gesture.screenPoint)
             }
         case .empty, .secure, .unsupported(fallbackAllowed: false), .failure:
+            logger.notice("Selection rejected or unavailable")
             return
         }
     }

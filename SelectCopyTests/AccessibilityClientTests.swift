@@ -4,6 +4,17 @@ import XCTest
 
 @MainActor
 final class AccessibilityClientTests: XCTestCase {
+    func testMouseSelectionReadsHitElementInsteadOfFocusedComposer() {
+        let query = PointerSelectionQuery()
+        let reader = AccessibilitySelectionReader(query: query)
+        XCTAssertEqual(reader.readSelection(at: CGPoint(x: 10, y: 20)), .text("message selection"))
+    }
+
+    func testMouseTextSelectionWithMissingAXTextAllowsCommandCFallback() {
+        let query = PointerSelectionQuery(pointerText: .error(.noValue))
+        let reader = AccessibilitySelectionReader(query: query)
+        XCTAssertEqual(reader.readSelection(at: CGPoint(x: 10, y: 20)), .unsupported(fallbackAllowed: true))
+    }
     func testReturnsSelectedTextWithoutNormalizingWhitespace() {
         let reader = self.makeReader(role: "AXTextArea", selectedText: .value("  hello\n"))
 
@@ -64,6 +75,18 @@ final class AccessibilityClientTests: XCTestCase {
                 result: .value(.init(role: role, subrole: nil, selectedText: selectedText))
             )
         )
+    }
+}
+
+private struct PointerSelectionQuery: AccessibilityQuerying {
+    var pointerText: AXStringValue = .value("message selection")
+
+    func focusedElementSnapshot() -> AccessibilitySnapshotResult {
+        .value(.init(role: "AXTextArea", subrole: nil, selectedText: .value("")))
+    }
+
+    func selectionElementSnapshot(at point: CGPoint) -> AccessibilitySnapshotResult {
+        .value(.init(role: "AXStaticText", subrole: nil, selectedText: pointerText))
     }
 }
 

@@ -31,7 +31,7 @@ final class SystemEventTapClient: EventTapServicing {
         self.invalidate()
         self.handler = handler
 
-        let eventTypes: [CGEventType] = [.leftMouseDown, .leftMouseUp, .keyUp]
+        let eventTypes: [CGEventType] = [.leftMouseDown, .leftMouseUp]
         let mask = eventTypes.reduce(CGEventMask(0)) { result, type in
             result | (CGEventMask(1) << type.rawValue)
         }

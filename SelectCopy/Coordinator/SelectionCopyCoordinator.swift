@@ -65,8 +65,12 @@ final class SelectionCopyCoordinator {
             self.presenter?.showCopyConfirmation(at: gesture.screenPoint)
         case .unsupported(fallbackAllowed: true):
             logger.notice("Attempting Command-C fallback")
-            if case .copied = await self.fallback.copySelection() {
+            let result = await self.fallback.copySelection()
+            if case .copied = result {
+                logger.notice("Fallback copied text successfully")
                 self.presenter?.showCopyConfirmation(at: gesture.screenPoint)
+            } else {
+                logger.notice("Fallback did not obtain selected text")
             }
         case .empty, .secure, .unsupported(fallbackAllowed: false), .failure:
             logger.notice("Selection rejected or unavailable")

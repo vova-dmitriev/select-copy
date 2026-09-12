@@ -9,8 +9,10 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Toggle(self.localizer.text("settings.toastEnabled"), isOn: self.$store.settings.toastEnabled)
-            Picker(self.localizer.text("settings.toastPosition"), selection: self.$store.settings.toastPosition) {
-                ForEach(ToastPosition.allCases) { position in Text(position.label).tag(position) }
+            HStack {
+                Text(self.localizer.text("settings.toastPosition"))
+                Spacer()
+                ToastPositionPicker(selection: self.$store.settings.toastPosition, localizer: self.localizer)
             }
             Picker(self.localizer.text("settings.toastContent"), selection: self.$store.settings.toastContentMode) {
                 Text(self.localizer.text("settings.localizedText")).tag(ToastContentMode.localizedText)
@@ -34,6 +36,6 @@ struct SettingsView: View {
             Button(self.localizer.text("menu.testToast"), action: self.showPreview)
         }
         .padding(20)
-        .frame(width: 430)
+        .frame(width: 480)
     }
 }

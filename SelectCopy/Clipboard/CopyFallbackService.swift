@@ -79,6 +79,17 @@ final class CopyFallbackService: FallbackCopying {
         do {
             for _ in 0 ..< self.maximumPollCount {
                 if self.pasteboard.changeCount != originalChangeCount {
+                    let blockedTypes: Set<String> = [
+                        "public.file-url", "NSFilenamesPboardType", "com.apple.finder.node",
+                        "public.png", "public.jpeg", "public.tiff", "com.adobe.pdf",
+                    ]
+                    let hasNonTextSelection = self.pasteboard.snapshot().items.contains { item in
+                        !blockedTypes.isDisjoint(with: item.keys)
+                    }
+                    if hasNonTextSelection {
+                        _ = self.pasteboard.restore(originalSnapshot)
+                        return .rejectedNonText
+                    }
                     guard let text = pasteboard.readText(), !text.isEmpty else {
                         _ = self.pasteboard.restore(originalSnapshot)
                         return .rejectedNonText

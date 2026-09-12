@@ -15,12 +15,7 @@ struct SelectCopyApp: App {
             PermissionMenuContent(permission: self.appDelegate.container.permission)
             Divider()
             Button("Settings") {
-                self.appDelegate.settingsWindow.show(
-                    store: self.appDelegate.container.settings,
-                    localizer: self.appDelegate.container.localizer,
-                    loginItem: self.appDelegate.loginItem,
-                    preview: { self.appDelegate.container.toast.showPreview() }
-                )
+                self.appDelegate.showSettings()
             }
             Button("Show test toast") { self.appDelegate.container.toast.showPreview() }
             Divider()

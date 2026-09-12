@@ -4,6 +4,17 @@ import XCTest
 
 @MainActor
 final class AccessibilityClientTests: XCTestCase {
+    func testMouseSelectionInScrollAreaAllowsFallback() {
+        for selectedText in [AXStringValue.error(.attributeUnsupported), .error(.noValue), .value("")] {
+            let reader = self.makeReader(role: "AXScrollArea", selectedText: selectedText)
+            XCTAssertEqual(reader.readSelection(at: CGPoint(x: 10, y: 20)), .unsupported(fallbackAllowed: true))
+        }
+    }
+
+    func testMouseSelectionInGroupAllowsFallback() {
+        let reader = self.makeReader(role: "AXGroup", selectedText: .error(.attributeUnsupported))
+        XCTAssertEqual(reader.readSelection(at: CGPoint(x: 10, y: 20)), .unsupported(fallbackAllowed: true))
+    }
     func testMouseSelectionReadsHitElementInsteadOfFocusedComposer() {
         let query = PointerSelectionQuery()
         let reader = AccessibilitySelectionReader(query: query)

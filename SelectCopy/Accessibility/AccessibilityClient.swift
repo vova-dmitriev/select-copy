@@ -166,20 +166,22 @@ struct AccessibilitySelectionReader: SelectionReading {
         guard snapshot.subrole != "AXSecureTextField" else {
             return .secure
         }
+        let canFallback = Self.fallbackRoles.contains(snapshot.role ?? "")
+            || (allowEmptyFallback && ["AXScrollArea", "AXGroup"].contains(snapshot.role ?? ""))
 
         switch snapshot.selectedText {
         case let .value(text):
-            if text.isEmpty, allowEmptyFallback, Self.fallbackRoles.contains(snapshot.role ?? "") {
+            if text.isEmpty, allowEmptyFallback, canFallback {
                 return .unsupported(fallbackAllowed: true)
             }
             return text.isEmpty ? .empty : .text(text)
         case .error(.noValue):
-            if allowEmptyFallback, Self.fallbackRoles.contains(snapshot.role ?? "") {
+            if allowEmptyFallback, canFallback {
                 return .unsupported(fallbackAllowed: true)
             }
             return .empty
         case .error(.attributeUnsupported), .error(.notImplemented):
-            return .unsupported(fallbackAllowed: Self.fallbackRoles.contains(snapshot.role ?? ""))
+            return .unsupported(fallbackAllowed: canFallback)
         case let .error(error):
             return .failure(error)
         }

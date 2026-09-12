@@ -4,6 +4,22 @@ import XCTest
 
 @MainActor
 final class CopyFallbackServiceTests: XCTestCase {
+    func testFileSelectionWithTextRepresentationRestoresOriginalClipboard() async {
+        let original = [["public.utf8-plain-text": Data("before".utf8)]]
+        let pasteboard = PasteboardServiceFake(items: original)
+        let poster = KeyEventPosterFake {
+            pasteboard.replaceWithText("file.txt")
+            pasteboard.items[0]["public.file-url"] = Data("file:///tmp/file.txt".utf8)
+        }
+        let service = CopyFallbackService(
+            pasteboard: pasteboard,
+            keyPoster: poster,
+            scheduler: ImmediateDelayScheduler()
+        )
+        let result = await service.copySelection()
+        XCTAssertEqual(result, .rejectedNonText)
+        XCTAssertEqual(pasteboard.items, original)
+    }
     func testChangedPasteboardWithTextReturnsCopiedText() async {
         let pasteboard = PasteboardServiceFake(items: [["public.utf8-plain-text": Data("before".utf8)]])
         let poster = KeyEventPosterFake {

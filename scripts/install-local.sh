@@ -16,4 +16,7 @@ fi
 pkill -TERM -f '^/Applications/SelectCopy.app/Contents/MacOS/SelectCopy$' || true
 ditto "$task_built_app" /Applications/SelectCopy.app
 codesign --verify --strict /Applications/SelectCopy.app
+touch /Applications/SelectCopy.app
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \
+    -f /Applications/SelectCopy.app
 open /Applications/SelectCopy.app

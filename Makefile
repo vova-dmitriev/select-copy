@@ -1,4 +1,4 @@
-.PHONY: project test build format lint install-local
+.PHONY: project test build format lint install-local icons
 
 project:
 	xcodegen generate
@@ -17,3 +17,6 @@ lint:
 
 install-local:
 	bash scripts/install-local.sh
+
+icons:
+	swift scripts/generate-app-icon.swift

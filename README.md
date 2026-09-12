@@ -16,6 +16,14 @@ xcodegen generate
 xcodebuild test -project SelectCopy.xcodeproj -scheme SelectCopy -destination 'platform=macOS'
 ```
 
+For a local installation that retains Accessibility permission across updates:
+
+```sh
+make install-local
+```
+
+See [persistent local signing](docs/LOCAL_SIGNING.md).
+
 SelectCopy never keeps a copy history. Clipboard contents are restored when the fallback copy path encounters non-text data or fails.
 
 ## License

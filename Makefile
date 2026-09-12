@@ -1,4 +1,4 @@
-.PHONY: project test build format lint
+.PHONY: project test build format lint install-local
 
 project:
 	xcodegen generate
@@ -14,3 +14,6 @@ format:
 
 lint:
 	swiftlint lint --strict
+
+install-local:
+	bash scripts/install-local.sh

@@ -6,7 +6,7 @@ SelectCopy is a small macOS menu-bar utility that copies text immediately after 
 
 - macOS 13 Ventura or newer
 - Accessibility permission in System Settings → Privacy & Security → Accessibility
-- Xcode 15 or newer (XcodeGen is used to generate the project)
+- Xcode 16 or newer with Swift 6 (XcodeGen is used to generate the project)
 
 ## Build
 
@@ -23,6 +23,15 @@ make install-local
 ```
 
 See [persistent local signing](docs/LOCAL_SIGNING.md).
+
+## Compatibility
+
+This is an early development version. Selection detection depends on each
+application's Accessibility support. Some applications require the Cmd-C fallback;
+terminal compatibility is still being validated. Password fields are excluded.
+
+Local builds are not notarized distribution releases. The local signing identity
+is created on your Mac and must not be shared or committed.
 
 SelectCopy never keeps a copy history. Clipboard contents are restored when the fallback copy path encounters non-text data or fails.
 

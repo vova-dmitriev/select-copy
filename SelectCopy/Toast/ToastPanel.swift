@@ -37,6 +37,9 @@ final class ToastPanel: NSPanel, ToastPaneling {
 
     func show(content: ToastContent, frame: NSRect) {
         let view = NSHostingView(rootView: ToastView(content: content))
+        view.wantsLayer = true
+        view.layer?.cornerRadius = 11
+        view.layer?.masksToBounds = true
         self.hostingView = view
         contentView = view
         setFrame(frame, display: false)

@@ -27,6 +27,7 @@
 		54403B545D94633C5B36C74A /* SmokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8348C4B79D99A718C2AEBD /* SmokeUITests.swift */; };
 		5A301B09353EAF386F156682 /* PermissionCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19135FD5B72494913CABA11D /* PermissionCoordinatorTests.swift */; };
 		6A451D23C5AEABD5F63760EC /* SelectionGestureClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E9782AB912727B415B5DC2 /* SelectionGestureClassifier.swift */; };
+		6EC7B323960CCF787B72D2EC /* ToastPanelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C11BE2E5D3FCA1D6B7530C /* ToastPanelTests.swift */; };
 		704CB465EFA161515B56F3C9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F20DEA042EA58F823B3443 /* AppSettings.swift */; };
 		76DC4A1D764940114F6E9160 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 11544D493FA685A0971F2E00 /* Localizable.xcstrings */; };
 		86609D87E21A48E5ABE52861 /* AppContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4DD4167FBEB2098A4C4E8D /* AppContainerTests.swift */; };
@@ -120,6 +121,7 @@
 		D69767D9EACB5C270D62AE16 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		D8E3784794BE439293554F93 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E52535D259E597D830EF236B /* InputEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEvent.swift; sourceTree = "<group>"; };
+		E7C11BE2E5D3FCA1D6B7530C /* ToastPanelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastPanelTests.swift; sourceTree = "<group>"; };
 		EE89BADF0826B1A30EBE4CD4 /* Localizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
 		EF5DB83B9152F85314DF48C8 /* AccessibilityClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityClientTests.swift; sourceTree = "<group>"; };
 		F02D5E6DF29C397FCC673592 /* SelectCopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelectCopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +153,7 @@
 				1E3A15FA1B7A9E473A1006CF /* SmokeTests.swift */,
 				8E62D3F73D1E876629D2373C /* TestDoubles.swift */,
 				ABDA1DB0DCC6957A21F69CAE /* ToastCoordinatorTests.swift */,
+				E7C11BE2E5D3FCA1D6B7530C /* ToastPanelTests.swift */,
 				BD2A2AC73D3B7A3CD725BB35 /* ToastPositionTests.swift */,
 			);
 			path = SelectCopyTests;
@@ -473,6 +476,7 @@
 				E27BD54D25AA27DAB5A673E3 /* SmokeTests.swift in Sources */,
 				4D7CD25ABA32C109A0A01A35 /* TestDoubles.swift in Sources */,
 				064C74C766BC7D98F4BC2EF3 /* ToastCoordinatorTests.swift in Sources */,
+				6EC7B323960CCF787B72D2EC /* ToastPanelTests.swift in Sources */,
 				45AC600C717C942E5F6E9662 /* ToastPositionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

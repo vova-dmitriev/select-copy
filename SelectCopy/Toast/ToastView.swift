@@ -14,10 +14,8 @@ struct ToastView: View {
         }
         .font(.system(size: 14, weight: .medium))
         .padding(.horizontal, self.content == .iconOnly ? 10 : 12)
-        .frame(minHeight: 34)
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
-        .shadow(radius: 12, y: 4)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(self.content == .iconOnly ? "Copied" : (self.content.textValue ?? "Copied"))
     }

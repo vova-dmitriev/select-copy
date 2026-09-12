@@ -1,12 +1,15 @@
 import AppKit
+import Combine
 import SwiftUI
 
 @MainActor
 final class OnboardingWindowController: NSObject, NSWindowDelegate {
     private var window: NSWindow?
+    private var permissionObservation: AnyCancellable?
 
     func show(permission: PermissionCoordinator) {
         if let window {
+            NSApplication.shared.activate(ignoringOtherApps: true)
             window.makeKeyAndOrderFront(nil); return
         }
         let controller = NSHostingController(rootView: OnboardingView(
@@ -20,10 +23,15 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         window.delegate = self
         self.window = window
         window.center()
+        NSApplication.shared.activate(ignoringOtherApps: true)
         window.makeKeyAndOrderFront(nil)
+        self.permissionObservation = permission.$isTrusted.sink { [weak self] trusted in
+            if trusted { self?.window?.close() }
+        }
     }
 
     func windowWillClose(_ notification: Notification) {
         self.window = nil
+        self.permissionObservation = nil
     }
 }

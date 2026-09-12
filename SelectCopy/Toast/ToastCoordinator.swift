@@ -19,8 +19,15 @@ protocol ToastScreenProviding: AnyObject {
 @MainActor
 protocol ToastPaneling: AnyObject {
     var contentSize: NSSize { get }
+    func size(for content: ToastContent) -> NSSize
     func show(content: ToastContent, frame: NSRect)
     func hide()
+}
+
+extension ToastPaneling {
+    func size(for _: ToastContent) -> NSSize {
+        contentSize
+    }
 }
 
 @MainActor
@@ -75,7 +82,7 @@ final class ToastCoordinator: CopyConfirmationPresenting {
         }
 
         let frame = self.settings.settings.toastPosition.frame(
-            for: self.panel.contentSize,
+            for: self.panel.size(for: content),
             in: screen.visibleFrame,
             inset: 20
         )

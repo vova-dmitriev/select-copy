@@ -11,6 +11,15 @@ final class ToastPanel: NSPanel, ToastPaneling {
         Self.toastContentSize
     }
 
+    func size(for content: ToastContent) -> NSSize {
+        guard case let .text(text) = content else {
+            return NSSize(width: 36, height: 36)
+        }
+        let font = NSFont.systemFont(ofSize: 14, weight: .medium)
+        let textWidth = (text as NSString).size(withAttributes: [.font: font]).width
+        return NSSize(width: min(360, ceil(textWidth) + 48), height: 36)
+    }
+
     init() {
         super.init(
             contentRect: NSRect(origin: .zero, size: Self.toastContentSize),

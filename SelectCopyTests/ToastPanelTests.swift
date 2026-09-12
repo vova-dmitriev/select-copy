@@ -4,6 +4,11 @@ import XCTest
 
 @MainActor
 final class ToastPanelTests: XCTestCase {
+    func testTextContentAlignsLeadingWhileIconOnlyRemainsCentered() {
+        XCTAssertEqual(ToastContent.text("Copied").alignment, .leading)
+        XCTAssertEqual(ToastContent.iconOnly.alignment, .center)
+    }
+
     func testMaterialBackingIsClippedToRoundedToastBounds() throws {
         let panel = ToastPanel()
         defer { panel.hide() }

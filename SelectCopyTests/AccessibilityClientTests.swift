@@ -4,6 +4,36 @@ import XCTest
 
 @MainActor
 final class AccessibilityClientTests: XCTestCase {
+    func testCanvasTerminalUsesItsContainerForFallback() {
+        let image = AccessibilityElementSnapshot(
+            role: "AXImage", subrole: nil, selectedText: .error(.attributeUnsupported)
+        )
+        let group = AccessibilityElementSnapshot(
+            role: "AXGroup", subrole: nil, selectedText: .error(.attributeUnsupported)
+        )
+        let result = AccessibilitySelectionResolver.resolve([image, group])
+        let reader = AccessibilitySelectionReader(query: AccessibilityQuerySpy(result: result))
+        XCTAssertEqual(reader.readSelection(at: .zero), .unsupported(fallbackAllowed: true))
+    }
+
+    func testStandaloneImageDoesNotAllowTextCopyFallback() {
+        let image = AccessibilityElementSnapshot(
+            role: "AXImage", subrole: nil, selectedText: .error(.attributeUnsupported)
+        )
+        let result = AccessibilitySelectionResolver.resolve([image])
+        let reader = AccessibilitySelectionReader(query: AccessibilityQuerySpy(result: result))
+        XCTAssertEqual(reader.readSelection(at: .zero), .unsupported(fallbackAllowed: false))
+    }
+
+    func testSecureAncestorRejectsSelectionEvenWhenChildExposesText() {
+        let text = AccessibilityElementSnapshot(role: "AXStaticText", subrole: nil, selectedText: .value("secret"))
+        let secure = AccessibilityElementSnapshot(
+            role: "AXTextField", subrole: "AXSecureTextField", selectedText: .error(.attributeUnsupported)
+        )
+        let result = AccessibilitySelectionResolver.resolve([text, secure])
+        let reader = AccessibilitySelectionReader(query: AccessibilityQuerySpy(result: result))
+        XCTAssertEqual(reader.readSelection(at: .zero), .secure)
+    }
     func testMouseSelectionInScrollAreaAllowsFallback() {
         for selectedText in [AXStringValue.error(.attributeUnsupported), .error(.noValue), .value("")] {
             let reader = self.makeReader(role: "AXScrollArea", selectedText: selectedText)

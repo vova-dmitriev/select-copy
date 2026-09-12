@@ -36,25 +36,19 @@ struct SystemAccessibilityQuery: AccessibilityQuerying {
         let error = AXUIElementCopyElementAtPosition(system, Float(point.x), Float(point.y), &hit)
         guard error == .success, let initialElement = hit else { return .error(error) }
         var element = initialElement
-        var textCandidate: AccessibilityElementSnapshot?
+        var snapshots: [AccessibilityElementSnapshot] = []
         for _ in 0..<16 {
-            let snapshot = snapshot(element: element)
-            if snapshot.subrole == "AXSecureTextField" { return .value(snapshot) }
-            if Self.textRoles.contains(snapshot.role ?? "") {
-                if case let .value(text) = snapshot.selectedText, !text.isEmpty { return .value(snapshot) }
-                textCandidate = textCandidate ?? snapshot
-            }
+            snapshots.append(snapshot(element: element))
             var parentValue: CFTypeRef?
             guard AXUIElementCopyAttributeValue(element, "AXParent" as CFString, &parentValue) == .success,
                   let parentValue, CFGetTypeID(parentValue) == AXUIElementGetTypeID() else { break }
             element = unsafeDowncast(parentValue, to: AXUIElement.self)
         }
-        let result = textCandidate ?? snapshot(element: initialElement)
-        logger.notice("Mouse selection role: \(result.role ?? "unknown", privacy: .public)")
-        return .value(result)
+        let result = AccessibilitySelectionResolver.resolve(snapshots)
+        let roles = snapshots.compactMap(\.role).joined(separator: "/")
+        logger.notice("Mouse selection role chain: \(roles, privacy: .public)")
+        return result
     }
-
-    private static let textRoles: Set<String> = ["AXDocument", "AXStaticText", "AXTextArea", "AXTextField", "AXWebArea"]
 
     private func snapshot(element: AXUIElement) -> AccessibilityElementSnapshot {
         AccessibilityElementSnapshot(

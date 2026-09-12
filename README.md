@@ -2,6 +2,14 @@
 
 SelectCopy is a small macOS menu-bar utility that copies text immediately after you select it with the mouse. It supports Accessibility API reads with a safe Cmd-C fallback, a configurable confirmation toast, launch-at-login, six toast positions, custom text/icon-only mode, and English/Russian/system language.
 
+## Screenshots
+
+### Settings
+
+Configure the notification, toast position, text, language, and launch at login.
+
+![SelectCopy settings](docs/screenshots/settings.png)
+
 ## Requirements
 
 - macOS 13 Ventura or newer
